@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hour: 2016-06-13 18:58:35
+  location: MyString
+  likes: 1
+  latitude: 1.5
+  longitude: 1.5
+  user_id: 1
+  description: MyText
+
+two:
+  hour: 2016-06-13 18:58:35
+  location: MyString
+  likes: 1
+  latitude: 1.5
+  longitude: 1.5
+  user_id: 1
+  description: MyText
