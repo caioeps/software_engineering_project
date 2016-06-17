@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613215447) do
+ActiveRecord::Schema.define(version: 20160613215834) do
+
+  create_table "occurrences", force: :cascade do |t|
+    t.datetime "hour"
+    t.string   "location"
+    t.integer  "likes"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "user_id"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
