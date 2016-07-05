@@ -27,11 +27,11 @@ function validateHour() {
 }
 
 function validateDate() {
-  day = parseInt(dateField.val().split(':')[0]);
-  month = parseInt(dateField.val().split(':')[1]);
-  year = parseInt(dateField.val().split(':')[2]);
+  day = parseInt(dateField.val().split('/')[0]);
+  month = parseInt(dateField.val().split('/')[1]);
+  year = parseInt(dateField.val().split('/')[2]);
 
-  if (hasAnyText(dateField) && (day < 0 || day > 31 || month < 0 || month > 12 || year < 0)){
+  if (hasAnyText(dateField) && (day > 31 || month > 12)){
     dateErrorDiv.show();
     disable_submit_button(true)
     submitButton.removeClass('red');
