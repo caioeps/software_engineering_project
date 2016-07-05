@@ -21,4 +21,13 @@ RSpec.describe User, type: :model do
 
     expect(occurrence.time).to eq(DateTime.new(1995, 10, 30, 10, 30, 0, '-3'))
   end
+
+  it 'should get latitude and longitude from API' do
+    occurrence = Occurrence.new(date: '30/10/1995', hour: '10:30', location: 'Rua ceará', description: 'blablabla')
+
+    occurrence.save
+
+    expect(occurrence.latitude.nil?).to eq(false)
+    expect(occurrence.longitude.nil?).to eq(false)
+  end
 end

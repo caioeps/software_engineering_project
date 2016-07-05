@@ -5,6 +5,10 @@ class OccurrencesController < ApplicationController
   # GET /occurrences.json
   def index
     @occurrences = Occurrence.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @occurrences }
+    end
   end
 
   # GET /occurrences/1

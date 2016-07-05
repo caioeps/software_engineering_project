@@ -11,7 +11,7 @@ class Occurrence < ActiveRecord::Base
   attr_accessor :date
 
   # Callbacks
-  # before_save :set_latitute_and_longitude
+  before_save :set_latitute_and_longitude
   after_initialize :set_defaults
   before_save :set_time
 
@@ -36,6 +36,12 @@ private
     day   = @date.split('/')[0].to_i
 
     self.time = DateTime.new(year, month, day, hour, minutes, 0, '-3')
+  end
+
+  def get_lat_long(location)
+    geo = Geocoder.search(location).first
+    @occurrence.latitude  = geo.latitude
+    @occurrence.longitude = geo.longitude
   end
 
   def set_defaults

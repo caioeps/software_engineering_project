@@ -1,5 +1,7 @@
+
 <div id="map"></div>
 
-<%= content_for :js do %>
+<%= content_for :post_js do %>
   <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js' %>
+  <%= javascript_include_tag 'map' %>
 <% end %>

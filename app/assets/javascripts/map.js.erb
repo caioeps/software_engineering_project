@@ -1,20 +1,22 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
+//= require plugins/gmap.js
 
-map = new GMaps({
-  div: '#map',
-  lat: -3.7572221,
-  lng: -38.5356611,
-  zoom: 13
+$(document).ready(function() {
+  map = new GMaps({
+    div: '#map',
+    lat: -3.7572221,
+    lng: -38.5356611,
+    zoom: 13
+  });
+
+  occurrences = loadMarkers();
 });
 
 function loadMarkers() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-     document.getElementById("demo").innerHTML = xhttp.responseText;
-    }
-  };
-  xhttp.open("GET", <%= occurrences_path(format: :json) %>, true);
-  xhttp.send();
+  return $.ajax({
+    type: 'GET',
+    url: '<%= Rails.application.routes.url_helpers.occurrences_url(format: :json) %>',
+    datatype: 'json'
+  }).responseJSON;
 }
