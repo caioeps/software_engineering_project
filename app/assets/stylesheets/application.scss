@@ -15,3 +15,11 @@
  */
 
 @require "materialize";
+
+#new_occurrence_modal {
+  min-height: 87%;
+}
+
+.picker--opened .picker__frame {
+  top: 0;
+}
