@@ -1,0 +1,28 @@
+<%= form_for(@occurrence) do |f| %>
+  <% if @occurrence.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@occurrence.errors.count, "error") %> prohibited this occurrence from being saved:</h2>
+
+      <ul>
+      <% @occurrence.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :date %>
+  <%= f.text_field :date, class: 'date', placeholder: 'dd/mm/aaaa' %>
+
+  <%= f.label :hour %>
+  <%= f.text_field :hour, class: 'hour', placeholder: 'hh:mm', onkeyup: 'validateHour()' %>
+  <div id="occurrence_hour_error" class="red-text">Digite um horário válido!</div>
+
+  <%= f.label :location %>
+  <%= f.text_field :location %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+
+  <%= f.submit 'Submeter', class: 'modal-action modal-close btn red', id: 'submit_button' %>
+<% end %>

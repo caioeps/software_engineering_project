@@ -1,8 +1,10 @@
 <nav class="red">
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo">Redline</a>
+    <span class="brand-logo">Redline</span>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <% if current_user.present? %>
+        <!-- <li><button data-target="new_occurrence_modal" class=" btn modal-trigger">Registrar ocorrência</button></li> -->
+        <a class="waves-effect waves-light btn modal-trigger" href="#new_occurrence_modal">Modal</a>
         <li><%= current_user.email %></li>
         <li><%= link_to 'Sair', destroy_user_session_path, method: :delete %></li>
       <% else %>
@@ -11,3 +13,5 @@
     </ul>
   </div>
 </nav>
+
+<%= render 'occurrences/new_modal' %>
