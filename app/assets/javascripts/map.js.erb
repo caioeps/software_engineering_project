@@ -1,7 +1,4 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
 //= require plugins/gmap.js
-
 $(document).ready(function() {
   map = new GMaps({
     div: '#map',
@@ -10,13 +7,32 @@ $(document).ready(function() {
     zoom: 13
   });
 
-  occurrences = loadMarkers();
-});
-
-function loadMarkers() {
-  return $.ajax({
+  var response = $.ajax({
     type: 'GET',
     url: '<%= Rails.application.routes.url_helpers.occurrences_url(format: :json) %>',
-    datatype: 'json'
-  }).responseJSON;
+  }).done(function(data) {
+    loadMarkersIntoMap(map, data);
+  });
+
+  map.addMarker({
+  lat: -3.7572221,
+  lng: -38.5356611,
+    title: 'Assalto!'
+  });
+});
+
+function loadMarkersIntoMap(map, occurrences) {
+  var markers = [];
+  console.log(occurrences);
+  for(i = 0; i < occurrences.length; i++) {
+    markers[i] = {
+      lat: occurrences[i].latitude,
+      lng: occurrences[i].longitude,
+      title: 'Assalto!'
+    }
+  }
+
+  map.addMarkers(markers);
+
+  return occurrences;
 }
