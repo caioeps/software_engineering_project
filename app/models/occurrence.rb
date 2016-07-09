@@ -18,6 +18,11 @@ class Occurrence < ActiveRecord::Base
   # Relations
   belongs_to :user
 
+  def as_json(options={})
+    options[:except] ||= [:updated_at, :user_id]
+    super(options)
+  end
+
 private
   # Callback functions
   def set_latitute_and_longitude

@@ -1,6 +1,10 @@
 
 <div id="map"></div>
 
+<%= content_for :modals do %>
+  <%= render 'occurrences/modal_show' %>
+<% end -%>
+
 <%= content_for :post_js do %>
   <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js' %>
   <%= javascript_include_tag 'map' %>

@@ -13,12 +13,6 @@ $(document).ready(function() {
   }).done(function(data) {
     loadMarkersIntoMap(map, data);
   });
-
-  map.addMarker({
-  lat: -3.7572221,
-  lng: -38.5356611,
-    title: 'Assalto!'
-  });
 });
 
 function loadMarkersIntoMap(map, occurrences) {
@@ -28,11 +22,25 @@ function loadMarkersIntoMap(map, occurrences) {
     markers[i] = {
       lat: occurrences[i].latitude,
       lng: occurrences[i].longitude,
-      title: 'Assalto!'
+      occurrenceId: occurrences[i].id,
+      click: function(e) {
+        // showOccurrenceInModal(e.id);
+        showOccurrenceInModal(e.occurrenceId);
+      }
     }
   }
 
   map.addMarkers(markers);
 
   return occurrences;
+}
+
+function showOccurrenceInModal(occurrenceId) {
+  show_occurrence_modal = $('#show_occurrence_modal');
+  show_occurrence_modal.load(showUrl(occurrenceId));
+  show_occurrence_modal.openModal();
+}
+
+function showUrl(occurrenceId) {
+  return '<%= Rails.application.routes.url_helpers.occurrences_path %>' + '/' + occurrenceId;
 }

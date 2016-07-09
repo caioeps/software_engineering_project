@@ -1,6 +1,7 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
+// Validations ///////////////////////////////////////////////////////////////////////
 $(document).ready(function() {
   hourField = $('#occurrence_hour');
   dateField = $('#occurrence_date');
@@ -51,3 +52,4 @@ function hasAnyText(div) {
 function disable_submit_button(option){
   submitButton.prop("disabled",option);
 }
+// End of validations /////////////////////////////////////////////////////////////
