@@ -1,34 +1,64 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @occurrence.description %>
-</p>
+<div class="row">
+  <div class="col s8 left">
+    <p>
+      <b>Local</b><br>
+      <%= @occurrence.location %>
+    </p>
+  </div>
 
-<p>
-  <strong>Time:</strong>
-  <%= @occurrence.time %>
-</p>
+  <div class="col s4 right">
+    <p>
+      <%= @occurrence.time.strftime('%d/%m/%Y às %H:%m') %>
+    </p>
+  </div>
+</div>
 
-<p>
-  <strong>Rating:</strong>
-  <%= @occurrence.rating %>
-</p>
+<div class="row">
+  <div class="col s12 left">
+    <b>Popularidade:</b>
+    <span class="rating">
+      <%= @occurrence.rating %>
+    </span>
+    <div class="voting">
+      <%= link_to upvote_occurrence_path(@occurrence.id), remote: true, method: :patch do %>
+        <i class="material-icons green-text">thumb_up</i>
+      <% end %>
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @occurrence.latitude %>
-</p>
+      <%= link_to downvote_occurrence_path(@occurrence.id), method: :patch, remote: true do %>
+        <i class="material-icons red-text">thumb_down</i>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Longitude:</strong>
-  <%= @occurrence.longitude %>
-</p>
+<div class="row">
+  <div class="col s12 m8">
+    <b>Descrição:</b>
+    <p>
+      <%= @occurrence.description %>
+    </p>
+  </div>
 
-<p>
-  <strong>Location:</strong>
-  <%= @occurrence.location %>
-</p>
+</div>
 
-<%= link_to 'Edit', edit_occurrence_path(@occurrence) %> |
-<%= link_to 'Back', occurrences_path %>
+
+
+
+<div class="row">
+  <!-- Botar os comentários aqui -->
+</div>
+
+<script type="text/javascript">
+  votingButtons = $('div.voting a');
+  buttonsIcons = $('div.voting a i');
+  rating = $('span.rating');
+
+  votingButtons.click(function() {
+    buttonsIcons.removeClass('red-text green-text');
+    buttonsIcons.addClass('grey-text');
+    rating.text(parseInt(rating.text().trim()) + 1)
+    votingButtons.fadeOut(500);
+  });
+</script>

@@ -24,7 +24,6 @@ function loadMarkersIntoMap(map, occurrences) {
       lng: occurrences[i].longitude,
       occurrenceId: occurrences[i].id,
       click: function(e) {
-        // showOccurrenceInModal(e.id);
         showOccurrenceInModal(e.occurrenceId);
       }
     }

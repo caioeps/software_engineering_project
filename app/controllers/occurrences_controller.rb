@@ -1,5 +1,8 @@
 class OccurrencesController < ApplicationController
-  before_action :set_occurrence, only: [:show, :edit, :update, :destroy]
+  before_action :set_occurrence, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  layout 'empty', only: [:show]
+
+  # CRUD #################################################################################################
 
   # GET /occurrences
   # GET /occurrences.json
@@ -28,8 +31,9 @@ class OccurrencesController < ApplicationController
   # POST /occurrences
   # POST /occurrences.json
   def create
-    @occurrence      = Occurrence.new(occurrence_params)
-    @occurrence.user = current_user
+    @occurrence = current_user.occurrences.build = Occurrence.new(occurrence_params)
+    set_lat_lgn
+    set_time
 
     respond_to do |format|
       if @occurrence.save
@@ -65,15 +69,44 @@ class OccurrencesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  # End of CRUD #################################################################################################
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_occurrence
-      @occurrence = Occurrence.find(params[:id])
-    end
+  def upvote
+    @occurrence.upvote()
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def occurrence_params
-      params.require(:occurrence).permit(:description, :date, :hour, :rating, :latitude, :longitude, :location)
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render json: @resource }
+      format.js   { render nothing: true }
     end
+  end
+
+  def downvote
+    @occurrence.downvote()
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render json: @resource }
+      format.js   { render nothing: true }
+    end
+  end
+
+private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_occurrence
+    @occurrence = Occurrence.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def occurrence_params
+    params.require(:occurrence).permit(:description, :date, :hour, :rating, :latitude, :longitude, :location)
+  end
+
+  def set_lat_lgn
+    @occurrence.get_lat_long(occurrence_params[:location])
+  end
+
+  def set_time
+    @occurrence.set_time
+  end
 end

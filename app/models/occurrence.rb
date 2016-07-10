@@ -11,28 +11,35 @@ class Occurrence < ActiveRecord::Base
   attr_accessor :date
 
   # Callbacks
-  before_save :set_latitute_and_longitude
-  after_initialize :set_defaults
-  before_save :set_time
+  before_save :set_defaults, on: :create
 
   # Relations
   belongs_to :user
 
   def as_json(options={})
-    options[:except] ||= [:updated_at, :user_id]
+    options[:except] ||= [:updated_at, :user_id] # Retira esses attrs do JSON
     super(options)
   end
 
-private
-  # Callback functions
+  def upvote
+    Rails.logger.info "Rating: #{rating.nil? ? 'nil' : rating}"
+    increment(:rating)
+    Rails.logger.info "Rating: #{rating}"
+  end
+
+  def downvote
+    decrement!(:rating)
+  end
+
   def set_latitute_and_longitude
     geo = Geocoder.search(location).first
     self.latitude = geo.latitude
     self.longitude = geo.longitude
   end
 
+private
+  # Callback functions
   def set_time
-    # self.time = DateTimeToString.translate(@date, @hour)
     hour    = @hour.split(':')[0].to_i
     minutes = @hour.split(':')[1].to_i
 

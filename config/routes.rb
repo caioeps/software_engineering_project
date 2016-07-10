@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   default_url_options host: Rails.env.production? ? 'example.com' : 'localhost:3000'
-  
-  resources :occurrences
+
+  resources :occurrences do
+    member do
+      patch :upvote
+      patch :downvote
+    end
+  end
+
   devise_for :users
 
   root 'map#map'

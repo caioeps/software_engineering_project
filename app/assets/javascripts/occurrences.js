@@ -53,3 +53,17 @@ function disable_submit_button(option){
   submitButton.prop("disabled",option);
 }
 // End of validations /////////////////////////////////////////////////////////////
+
+// Essa função é chamada em maps.js.erb
+function clickVote() {
+  votingButtons = $('div.voting a');
+  buttonsIcons = $('div.voting a i');
+  rating = $('span.rating');
+
+  votingButtons.click(function() {
+    buttonsIcons.removeClass('red-text green-text');
+    buttonsIcons.addClass('grey-text');
+    rating.text(parseInt(rating.text().trim()) + 1)
+    votingButtons.fadeOut(500);
+  });
+}
