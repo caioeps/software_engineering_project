@@ -15,6 +15,7 @@ class Occurrence < ActiveRecord::Base
 
   # Relations
   belongs_to :user
+  has_many   :comments
 
   def as_json(options={})
     options[:except] ||= [:updated_at, :user_id] # Retira esses attrs do JSON
