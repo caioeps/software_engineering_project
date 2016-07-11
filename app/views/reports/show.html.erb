@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @report.text %>
+</p>
+
+<p>
+  <strong>Occurrence:</strong>
+  <%= @report.occurrence_id %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @report.comment_id %>
+</p>
+
+<%= link_to 'Edit', edit_report_path(@report) %> |
+<%= link_to 'Back', reports_path %>
