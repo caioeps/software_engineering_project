@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :occurrences
   has_many :comments
+
+  def first_name
+    name.split(' ').first
+  end
 end

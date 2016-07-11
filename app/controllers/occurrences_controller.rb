@@ -17,6 +17,8 @@ class OccurrencesController < ApplicationController
   # GET /occurrences/1
   # GET /occurrences/1.json
   def show
+    @comment = Comment.new
+    @comments = @occurrence.comments.order('created_at DESC')
   end
 
   # GET /occurrences/new

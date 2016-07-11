@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :comments
   default_url_options host: Rails.env.production? ? 'example.com' : 'localhost:3000'
 
   resources :occurrences do
@@ -7,6 +6,8 @@ Rails.application.routes.draw do
       patch :upvote
       patch :downvote
     end
+
+    resources :comments
   end
 
   devise_for :users

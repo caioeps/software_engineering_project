@@ -1,33 +1,25 @@
-<%= form_for(@comment) do |f| %>
+<%= form_for @comment, url: occurrence_comments_path(@occurrence.id), remote: true do |f| %>
   <% if @comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
       <ul>
-      <% @comment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
-    </div>
+  </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
+  <div class="col s12 m8">
+    <div class="field">
+      <%= f.text_area :body, onchange: 'validateOccurrenceCommentBody()' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :occurrence_id %><br>
-    <%= f.text_field :occurrence_id %>
-  </div>
-  <div class="field">
-    <%= f.label :time %><br>
-    <%= f.datetime_select :time %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="col 12 m4">
+    <div class="actions">
+      <%= f.submit 'Enviar', class: 'btn red', id: 'occurrence_comment_submit_button' %>
+    </div>
   </div>
 <% end %>
