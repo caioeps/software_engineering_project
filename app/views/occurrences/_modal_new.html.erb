@@ -14,20 +14,31 @@
           </div>
         <% end %>
 
-        <%= f.label :date %><div id="occurrence_date_error" class="red-text">(Digite uma data válida!)</div>
-        <%= f.text_field :date, class: 'date', placeholder: 'dd/mm/aaaa', onkeyup: 'validateDate()' %>
+        <div class="row">
+          <div class="col s6">
+            <%= f.label :date %><div id="occurrence_date_error" class="red-text">(Digite uma data válida!)</div>
+            <%= f.text_field :date, class: 'date', placeholder: 'dd/mm/aaaa', onkeyup: 'validateDate()' %>
+          </div>
 
-        <%= f.label :hour %><div id="occurrence_hour_error" class="red-text">(Digite um horário válido!)</div>
-        <%= f.text_field :hour, class: 'hour', placeholder: 'hh:mm', onkeyup: 'validateHour()' %>
+          <div class="col s6">
+            <%= f.label :hour %><div id="occurrence_hour_error" class="red-text">(Digite um horário válido!)</div>
+            <%= f.text_field :hour, class: 'hour', placeholder: 'hh:mm', onkeyup: 'validateHour()' %>
+          </div>
 
+          <div class="col s12">
+            <%= f.label :location %>
+            <%= f.text_field :location %>
+          </div>
 
-        <%= f.label :location %>
-        <%= f.text_field :location %>
+          <div class="col s12 input-field">
+            <%= f.label :description %>
+            <%= f.text_area :description, class: 'materialize-textarea' %>
+          </div>
 
-        <%= f.label :description %>
-        <%= f.text_area :description %>
-
-        <%= f.submit 'Submeter', class: 'modal-action modal-close btn red', id: 'submit_button' %>
+          <div class="col s12">
+            <%= f.submit 'Submeter', class: 'modal-action modal-close btn red', id: 'submit_button' %>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :reports
   default_url_options host: Rails.env.production? ? 'example.com' : 'localhost:3000'
 
   resources :occurrences do
@@ -11,10 +10,14 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  # Reports
+  post 'reports/:class/:class_id' => 'reports#create', as: :reports
+  # end of reports
+
+  devise_for :admins
   devise_for :users
 
   root 'map#map'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

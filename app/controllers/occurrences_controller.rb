@@ -33,7 +33,7 @@ class OccurrencesController < ApplicationController
   # POST /occurrences
   # POST /occurrences.json
   def create
-    @occurrence = current_user.occurrences.build = Occurrence.new(occurrence_params)
+    @occurrence = current_user.occurrences.build(occurrence_params)
     set_lat_lgn
     set_time
 

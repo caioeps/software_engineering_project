@@ -16,6 +16,7 @@ class Occurrence < ActiveRecord::Base
   # Relations
   belongs_to :user
   has_many   :comments
+  has_many   :reports
 
   def as_json(options={})
     options[:except] ||= [:updated_at, :user_id] # Retira esses attrs do JSON
@@ -38,8 +39,12 @@ class Occurrence < ActiveRecord::Base
     self.longitude = geo.longitude
   end
 
-private
-  # Callback functions
+  def get_lat_long(location)
+    geo = Geocoder.search(location).first
+    self.latitude  = geo.latitude
+    self.longitude = geo.longitude
+  end
+
   def set_time
     hour    = @hour.split(':')[0].to_i
     minutes = @hour.split(':')[1].to_i
@@ -51,12 +56,8 @@ private
     self.time = DateTime.new(year, month, day, hour, minutes, 0, '-3')
   end
 
-  def get_lat_long(location)
-    geo = Geocoder.search(location).first
-    @occurrence.latitude  = geo.latitude
-    @occurrence.longitude = geo.longitude
-  end
-
+private
+  # Callback functions
   def set_defaults
     self.rating = 0
   end

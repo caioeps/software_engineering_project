@@ -16,7 +16,7 @@
 </div>
 
 <div class="row">
-  <div class="col s12 left">
+  <div class="col s6 left">
     <b>Popularidade:</b>
     <span class="rating">
       <%= @occurrence.rating %>
@@ -30,6 +30,10 @@
         <i class="material-icons red-text">thumb_down</i>
       <% end %>
     </div>
+  </div>
+
+  <div class="col s6">
+    <%= link_to 'Reportar Ocorrencia', reports_path(@occurrence.class.to_s, @occurrence.id), method: :post, class: "btn btn-primary" %>
   </div>
 </div>
 
@@ -64,6 +68,9 @@
 
           <div class="col s6 right">
             <span class="right grey-text"><%= comment.created_at.strftime('%H:%m %d/%m/%Y') %></span>
+            <span class="right">
+              <%= link_to 'Reportar comentário', reports_path(comment.class.to_s, comment.id), method: :post, class: "btn small" %>
+            </span>
           </div>
 
           <div class="col s12">

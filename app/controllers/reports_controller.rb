@@ -24,14 +24,21 @@ class ReportsController < ApplicationController
   # POST /reports
   # POST /reports.json
   def create
-    @report = Report.new(report_params)
+    case params[:class]
+    when 'Comment'
+      @model = Comment.find(params[:class_id])
+    when 'Occurrence'
+      @model = Occurrence.find(params[:class_id])
+    end
+
+    @report = @model.reports.build
 
     respond_to do |format|
       if @report.save
-        format.html { redirect_to @report, notice: 'Report was successfully created.' }
+        format.html { redirect_to :back, notice: 'Report was successfully created.' }
         format.json { render :show, status: :created, location: @report }
       else
-        format.html { render :new }
+        format.html { render :back, notice: 'Deu ruim' }
         format.json { render json: @report.errors, status: :unprocessable_entity }
       end
     end
