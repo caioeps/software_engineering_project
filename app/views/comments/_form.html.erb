@@ -13,13 +13,13 @@
 
   <div class="col s12 m8">
     <div class="field">
-      <%= f.text_area :body, onchange: 'validateOccurrenceCommentBody()' %>
+      <%= f.text_area :body, onkeyup: 'validateOccurrenceCommentBody()' %>
     </div>
   </div>
 
   <div class="col 12 m4">
     <div class="actions">
-      <%= f.submit 'Enviar', class: 'btn red', id: 'occurrence_comment_submit_button' %>
+      <%= f.submit 'Enviar', class: 'btn red', id: 'occurrence_comment_submit_button', onclick: 'validateOccurrenceCommentBody()' %>
     </div>
   </div>
 <% end %>

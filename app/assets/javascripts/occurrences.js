@@ -7,7 +7,7 @@ $(document).ready(function() {
   dateField = $('#occurrence_date');
   hourErrorDiv = $('#occurrence_hour_error');
   dateErrorDiv = $('#occurrence_date_error');
-  submitButton = $('#submitButton');
+  submitButton = $('#submit_button');
 });
 
 function validateHour() {
@@ -16,10 +16,10 @@ function validateHour() {
 
   if (hasAnyText(hourField) && (hour < 0 || hour > 24 || minutes < 0 || minutes > 60)){
     hourErrorDiv.show();
-    disable_button(submitButton, true)
+    disableButton(submitButton, true)
   } else {
     hourErrorDiv.hide();
-    disable_button(submitButton, false)
+    disableButton(submitButton, false)
   }
 }
 
@@ -30,14 +30,10 @@ function validateDate() {
 
   if (hasAnyText(dateField) && (day > 31 || month > 12)){
     dateErrorDiv.show();
-    disable_button(submitButton, true)
-    submitButton.removeClass('red');
-    submitButton.addClass('grey');
+    disableButton(submitButton, true)
   } else {
     dateErrorDiv.hide();
-    disable_button(submitButton, false)
-    submitButton.removeClass('grey');
-    submitButton.addClass('red');
+    disableButton(submitButton, false)
   }
 }
 
@@ -45,9 +41,9 @@ function hasAnyText(div) {
   return div.val().trim() === '' ? false : true
 }
 
-function disable_button(button, option){
+function disableButton(button, option){
   button.prop("disabled", option);
-  button.addClass('grey');
+  option ? button.addClass('grey') : button.removeClass('grey');
 }
 // End of validations /////////////////////////////////////////////////////////////
 

@@ -3,16 +3,16 @@
 
 $(document).ready(function() {
   var commentsDiv = $('#occurrence_comments');
-  var submitCommentButton = $('#occurrence_comment_submit_button');
-  var commentBodyForm = $('#comment_body');
-
 });
 
 function validateOccurrenceCommentBody() {
+  var commentBodyForm = $('#comment_body');
+  var submitCommentButton = $('#occurrence_comment_submit_button');
+
   if(hasAnyText(commentBodyForm)) {
-    disable_button(submitCommentButton, false);
+    disableButton(submitCommentButton, false);
   }
   else {
-    disable_button(submitCommentButton, true);
+    disableButton(submitCommentButton, true);
   }
 }
