@@ -1,31 +1,30 @@
-<%= render 'shared/navbar' %>
 <div class="container">
   <div class="row">
-    <h2 class="center-align">Log in</h2>
+    <h2 class="center-align">Entrar</h2>
   </div>
 
   <div class="row center-align">
     <div class="col s12 m6 l4 push-m3 push-l4">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="field">
-          <%= f.label :email %><br />
+        <div class="field input-field">
+          <%= f.label :email, 'Email' %><br />
           <%= f.email_field :email, autofocus: true %>
         </div>
 
-        <div class="field">
-          <%= f.label :password %><br />
+        <div class="field input-field">
+          <%= f.label :password, 'Senha' %><br />
           <%= f.password_field :password, autocomplete: "off" %>
         </div>
 
         <% if devise_mapping.rememberable? -%>
           <div class="field">
             <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
+            <%= f.label :remember_me, 'Lembrar-me' %>
           </div>
         <% end -%>
 
         <div class="actions">
-          <%= f.submit "Log in" %>
+          <%= f.submit 'Entrar', class: 'btn red' %>
         </div>
       <% end %>
 

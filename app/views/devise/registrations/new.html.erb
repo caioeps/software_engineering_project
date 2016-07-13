@@ -1,4 +1,3 @@
-<%= render 'shared/navbar' %>
 <div class="container">
   <div class="row">
     <h2 class="center-align">Sign up</h2>
@@ -9,26 +8,26 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= devise_error_messages! %>
 
-        <div class="field">
+        <div class="field input-field">
           <%= f.label :email %><br />
           <%= f.email_field :email, autofocus: true %>
         </div>
 
-        <div class="field">
-          <%= f.label :password %>
+        <div class="field input-field">
+          <%= f.label :password, 'Senha' %>
           <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> caracteres no mínimo)</em>
-          <% end %><br />
+            <em>(<%= @minimum_password_length %> caracteres no mínimo)</em>
+          <% end %><br /><br>
           <%= f.password_field :password, autocomplete: "off" %>
         </div>
 
-        <div class="field">
-          <%= f.label :password_confirmation %><br />
+        <div class="field input-field">
+          <%= f.label :password_confirmation, 'Confirmação de senha' %><br />
           <%= f.password_field :password_confirmation, autocomplete: "off" %>
         </div>
 
         <div class="actions">
-          <%= f.submit "Sign up" %>
+          <%= f.submit "Cadastrar-se", class: 'btn red' %>
         </div>
       <% end %>
 
